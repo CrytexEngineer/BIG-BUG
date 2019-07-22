@@ -1,0 +1,69 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+                name="mData"
+                type="com.example.detailnews.detailpage.MainDetailModel"/>
+
+        <variable
+                name="mListener"
+                type="com.example.detailnews.detailpage.MainDetailUserActionListener"/>
+
+    </data>
+
+
+    <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/dimens_8dp"
+                android:paddingBottom="@dimen/dimens_8dp"
+                android:paddingStart="@dimen/dimens_16dp"
+                android:paddingEnd="@dimen/dimens_16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{() -> mListener.onClickItem(mData)}">
+
+            <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:src="@mipmap/ic_launcher"/>
+
+            <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimens_16dp"
+                        android:layout_centerInParent="true"
+                        android:textSize="18sp"
+                        tools:text="Radhika Yusuf"
+                        android:text="@{mData.title}"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="bottom"
+                android:background="#EAEAEA"/>
+
+
+    </android.support.v7.widget.CardView>
+
+</layout>

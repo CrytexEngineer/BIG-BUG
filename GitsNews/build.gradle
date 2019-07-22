@@ -1,0 +1,31 @@
+apply plugin: 'com.android.dynamic-feature'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply from: '../deps.gradle'
+
+android {
+    compileSdkVersion 28
+
+
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        buildConfigField "String", "BASE_URL", "\"https://newsapi.org/v2/\""
+        buildConfigField "String", "API_KEY", "\"88bc6290f24c421594da2ed709183c57\""
+
+    }
+    dataBinding {
+        enabled = true
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':app')
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.synnapps:carouselview:0.1.4'
+}

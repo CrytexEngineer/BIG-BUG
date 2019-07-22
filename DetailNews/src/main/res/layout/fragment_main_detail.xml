@@ -1,0 +1,76 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+                name="mViewModel"
+                type="com.example.detailnews.detailpage.MainDetailViewModel"/>
+
+        <variable
+                name="mListener"
+                type="com.example.detailnews.detailpage.MainDetailUserActionListener"/>
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="@string/app_name"/>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshPaginate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerPaginate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="@{mViewModel.MainDetailList.isEmpty() ? View.GONE : View.VISIBLE}"
+                        app:listDataMainDetail="@{mViewModel.MainDetailList}"/>
+
+
+                <!--Empty layout, it will show when data empty & not requesting API-->
+                <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white"
+                        android:visibility="@{mViewModel.MainDetailList.isEmpty() &amp;&amp; !mViewModel.isRequesting ? View.VISIBLE : View.GONE}">
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Data is Empty\n replace this text ! :)"
+                            android:textSize="20sp"/>
+
+                </FrameLayout>
+
+
+            </RelativeLayout>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

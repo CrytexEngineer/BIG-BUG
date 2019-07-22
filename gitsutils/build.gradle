@@ -1,0 +1,80 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+//apply plugin: 'io.fabric'
+apply from: '../deps.gradle'
+
+android {
+    compileSdkVersion configVersion.sdk
+    defaultConfig {
+        minSdkVersion configVersion.minSdk
+        targetSdkVersion configVersion.sdk
+        versionCode configVersion.code
+        versionName configVersion.name
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    // Google support
+    api supportDependencies.appCompat
+    api supportDependencies.support
+    api supportDependencies.design
+    api supportDependencies.recyclerView
+    api supportDependencies.cardView
+    api supportDependencies.constraintLayout
+    api supportDependencies.kotlin
+
+    // Arch Components
+
+    api googleLibraries.archLcExt
+    api googleLibraries.archLcJava
+
+    // Network n' debugging
+    api libraries.stetho
+    api libraries.retrofit
+    api libraries.retrofitRx2
+    api libraries.okhttp
+    api libraries.okhttpLogging
+    debugApi libraries.chuckOkHttpLogging
+
+    // Async, thread, and multi thread
+    api libraries.rxAndroid
+    api libraries.rxJava
+
+    // Utils
+    api libraries.glide
+    api libraries.retrofitGson
+    api googleLibraries.crashlytics
+
+    kapt libraries.glideCompiler
+
+    annotationProcessor libraries.glideCompiler
+
+    // Unit Test
+    testImplementation testLibraries.junit
+    testImplementation testLibraries.mockito
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
+}
